@@ -70,6 +70,10 @@ package:  ## Create package
 	@cargo package
 .PHONY: package
 
+publish:  ## Publish package
+	@cargo publish
+.PHONY: publish
+
 help:  ## Display this message
 	@grep -E '^[0-9a-z\:\\]+: ' $(MAKEFILE_LIST) | \
 	  grep -E '  ## ' | \
