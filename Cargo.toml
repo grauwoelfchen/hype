@@ -1,16 +1,33 @@
 [package]
 name = "hype"
+description = """\
+An interface to interact with Discord via API
+"""
 version = "0.0.1"
 authors = ["Yasuhiro Яша Asaka <yasuhiro.asaka@grauwoelfchen.net>"]
 edition = "2018"
+homepage = "https://gitlab.com/grauwoelfchen/hype"
+readme = "README.md"
+keywords = []
+categories = [
+  "command-line-utilities",
+  "api-bindings",
+]
+documentation = "https://docs.rs/crate/hype"
+repository = "https://gitlab.com/grauwoelfchen/hype"
+license = "GPL-3.0-or-later"
 
 exclude = [
-  ".cargo-huskey/*",
-  ".tool/*",
+  "doc",
+  ".cargo-husky",
+  ".tool",
   "Makefile",
-  ".env",
+  "rust-toolchain",
+  ".env*",
+  ".gitignore",
   ".clippy.toml",
   ".rustfmt.toml",
+  ".gitlab-ci.yml",
 ]
 
 [dependencies]
