@@ -1,6 +1,6 @@
 # Hype
 
-An application interacts with Discord via APIs.
+An interface to interact with Discord via API.
 
 ## Repositories
 
