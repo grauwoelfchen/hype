@@ -42,8 +42,21 @@ test: | test\:all
 # coverage
 coverage:  ## Generate coverage report of tests [alias: cov]
 	@cargo test --bin $(PACKAGE) --no-run
-	@./.tool/setup-kcov
-	./.tool/get-covered $(PACKAGE)
+	@set -uo pipefail; \
+	dir="$$(pwd)"; \
+	output_dir="$${dir}/target/coverage"; \
+	target_dir="$${dir}/target/debug/deps"; \
+	if [ -f "$${output_dir}/index.js" ]; then \
+    rm "$${output_dir}/index.js"; \
+	fi; \
+	i=0; \
+	for file in $$(ls $$target_dir/$(PACKAGE)-* | grep -v '\.d$$'); do \
+	  kcov --verify --include-path=$$dir/src $$output_dir-$$i $$file; \
+	done; \
+	kcov --merge $$output_dir-$\* ; \
+	grep 'index.html' $$output_dir-0/index.js* | \
+	  grep -oE 'covered":"([0-9]*\.[0-9]*|[0-9]*)"' | \
+	  grep -oE '[0-9]*\.[0-9]*|[0-9]*'
 .PHONY: coverage
 
 cov: | coverage
@@ -66,6 +79,21 @@ clean:  ## Clean up
 	@cargo clean
 .PHONY: clean
 
+runner-%:  ## Run a CI job on local (docker)
+	@set -uo pipefail; \
+	job=$(subst runner-,,$@); \
+	opt=""; \
+	while read line; do \
+	  opt+=" --env $$(echo $$line | sed -E 's/^export //')"; \
+	done < .env.ci; \
+	gitlab-runner exec docker \
+	  --executor docker \
+	  --cache-dir /cache \
+	  --docker-volumes $$(pwd)/.cache/gitlab-runner:/cache \
+	  --docker-volumes /var/run/docker.sock:/var/run/docker.sock \
+	  $${opt} $${job}
+.PHONY: runner
+
 package:  ## Create package
 	@cargo package
 .PHONY: package
@@ -75,12 +103,12 @@ publish:  ## Publish package
 .PHONY: publish
 
 help:  ## Display this message
-	@grep -E '^[0-9a-z\:\\]+: ' $(MAKEFILE_LIST) | \
-	  grep -E '  ## ' | \
-	  sed -e 's/\(\s|\(\s[0-9a-z\:\\]*\)*\)  /  /' | \
+	@set -uo pipefail; \
+	grep -E '^[0-9a-z\%\:\\\-]+:  ## ' $(firstword $(MAKEFILE_LIST)) | \
+	  sed -e 's/\(\s|\(\s[0-9a-z\:\-\%\]*\)*\)  /  /' | \
 	  tr -d \\\\ | \
 	  awk 'BEGIN {FS = ":  ## "};  \
-	       {printf "\033[38;05;222m%-14s\033[0m %s\n", $$1, $$2}' | \
+	    {printf "\033[38;05;222m%-14s\033[0m %s\n", $$1, $$2}' | \
 	  sort
 .PHONY: help
 

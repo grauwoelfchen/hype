@@ -52,7 +52,7 @@ test:
     # test & get covered
     - KCOV_PFX=/usr/bin/ make coverage
   after_script:
-    - cat target/coverage/index.js
+    - cat target/coverage/index.js*
 
 build:
   stage: build

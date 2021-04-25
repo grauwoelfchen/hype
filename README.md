@@ -49,9 +49,10 @@ TODO
 
 ### CI
 
-Run CI jobs on local docker conatiner (Gentoo Linux) using gitlab-runner.  
-See `.gitlab-ci.yml`.
+Run CI jobs on a docker conatiner (grauwoelfchen/rust-stable: Gentoo Linux)
+using gitlab-runner. See `.gitlab-ci.yml`.
 
+#### Run jobs on local machine
 
 ```zsh
 # install gitlab-runner into .tools
