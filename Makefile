@@ -79,7 +79,7 @@ clean:  ## Clean up
 	@cargo clean
 .PHONY: clean
 
-runner-%:  ## Run a CI job on local (docker)
+runner-%:  ## Run a CI job on local (on Docker)
 	@set -uo pipefail; \
 	job=$(subst runner-,,$@); \
 	opt=""; \
@@ -104,9 +104,9 @@ publish:  ## Publish package
 
 help:  ## Display this message
 	@set -uo pipefail; \
-	grep -E '^[0-9a-z\%\:\\\-]+:  ## ' $(firstword $(MAKEFILE_LIST)) | \
-	  sed -e 's/\(\s|\(\s[0-9a-z\:\-\%\]*\)*\)  /  /' | \
-	  tr -d \\\\ | \
+	grep --extended-regexp '^[0-9a-z\%\:\\\-]+:  ## ' $(firstword $(MAKEFILE_LIST)) | \
+	  sed --expression='s/\(\s|\(\s[0-9a-z\:\-\%\]*\)*\)  /  /' | \
+	  tr --delete \\\\ | \
 	  awk 'BEGIN {FS = ":  ## "};  \
 	    {printf "\033[38;05;222m%-14s\033[0m %s\n", $$1, $$2}' | \
 	  sort
