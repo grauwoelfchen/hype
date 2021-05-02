@@ -18,9 +18,8 @@ repository = "https://gitlab.com/grauwoelfchen/hype"
 license = "GPL-3.0-or-later"
 
 exclude = [
-  "doc",
   ".cargo-husky",
-  ".tool",
+  ".cache",
   "Makefile",
   "rust-toolchain",
   ".env*",
