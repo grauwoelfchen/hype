@@ -127,4 +127,4 @@ help: ## Display this message
 .PHONY: help
 
 .DEFAULT_GOAL = test:all
-default: verify\:check verify\:format verify\:lint test\:all
+default: verify\:all test\:all
