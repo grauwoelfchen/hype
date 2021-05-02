@@ -49,20 +49,17 @@ TODO
 
 ### CI
 
-Run CI jobs on a docker conatiner (grauwoelfchen/rust-stable: Gentoo Linux)
+Run CI jobs on a docker conatiner (`grauwoelfchen/rust:stable`: Gentoo Linux)
 using gitlab-runner. See `.gitlab-ci.yml`.
 
 #### Run jobs on local machine
 
 ```zsh
-# install gitlab-runner into .tools
-% .tool/setup-gitlab-runner
-
 # prepare environment variables for CI via .env.ci
 % cp .env.ci.sample .env
 
 # e.g. test (see .gitlab-ci.yml)
-% .tool/ci-runner test
+% make runner-test
 ```
 
 

@@ -49,10 +49,9 @@ test:
     - kcov --version
     - mkdir -p .git/hooks
   script:
-    # test & get covered
-    - KCOV_PFX=/usr/bin/ make coverage
+    - make coverage
   after_script:
-    - cat target/coverage/index.js*
+    - cat target/coverage/bin/index.js*
 
 build:
   stage: build
