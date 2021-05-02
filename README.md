@@ -1,6 +1,16 @@
 # Hype
 
+[![pipeline](
+https://gitlab.com/grauwoelfchen/hype/badges/trunk/pipeline.svg)](
+https://gitlab.com/grauwoelfchen/hype/commits/trunk) [![coverage](
+https://gitlab.com/grauwoelfchen/hype/badges/trunk/coverage.svg)](
+https://gitlab.com/grauwoelfchen/hype/commits/trunk) [![crate::hype](
+https://img.shields.io/crates/v/hype?label=crates&style=flat)](
+https://crates.io/crates/hype) [![doc::hype](
+https://docs.rs/hype/badge.svg)](https://docs.rs/crate/hype)
+
 An interface to interact with Discord via API.
+
 
 ## Repositories
 
