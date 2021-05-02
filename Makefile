@@ -66,6 +66,14 @@ coverage: coverage\:bin ## Same as coverage:bin [alias: cov]
 cov: coverage
 .PHONY: cov
 
+# documentation
+document: ## Generate documentation files [alias: doc]
+	cargo rustdoc --package $(PACKAGE)
+.PHONY: document
+
+doc: document
+.PHONY: doc
+
 # build
 build\:debug: ## Build in debug mode [alias: build]
 	cargo build
